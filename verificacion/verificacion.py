@@ -14,6 +14,7 @@ import scipy, scipy.signal as sg
 from scipy.linalg import expm
 import control as ct
 import matplotlib
+matplotlib.rcParams.update({"font.family":"serif","font.serif":["Liberation Serif","TeX Gyre Termes"],"mathtext.fontset":"stix","pdf.fonttype":42,"ps.fonttype":42})  # tipografía tipo Times
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
@@ -71,7 +72,7 @@ for nombre, S in realiz.items():
       f"err total={np.abs(y_ok-yT).max():.1e}")
     if fig_data is None: fig_data = (y_to, y_ok)
 plt.figure(figsize=(3.3, 2.2))
-plt.plot(t, yT, "k", lw=1.6, label="Analítica, Ec. (7)")
+plt.plot(t, yT, "k", lw=1.6, label="Analítica, Ec. (4)")
 plt.plot(t, fig_data[0], "r--", lw=1.2, label="Código original")
 plt.plot(t, fig_data[1], "b:", lw=1.6, label="Código corregido")
 plt.xlabel("t [s]", fontsize=8); plt.ylabel("y(t)", fontsize=8); plt.grid(alpha=.3)
