@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Material suplementario · IAG en Matemáticas Avanzadas</title>
+<style>
+:root{--fg:#1d2430;--mut:#5b6575;--line:#dde2ea;--acc:#1f5fa8;--bg:#fff;--soft:#f5f7fa;--ok:#1d7a3e;--obs:#a36500;--no:#b42318}
+*{box-sizing:border-box} body{margin:0;font:16px/1.6 "Source Serif 4",Georgia,serif;color:var(--fg);background:var(--bg)}
+header{background:#14233a;color:#fff;padding:40px 24px 28px} header .w{max-width:980px;margin:auto}
+header h1{font:600 28px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0 0 8px}
+header p{margin:4px 0;color:#c9d3e3;font-family:system-ui,sans-serif;font-size:15px}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5}
+nav .w{max-width:980px;margin:auto;padding:10px 24px;display:flex;gap:18px;flex-wrap:wrap;font:500 14px system-ui,sans-serif}
+nav a{color:var(--acc);text-decoration:none} nav a:hover{text-decoration:underline}
+main{max-width:980px;margin:auto;padding:12px 24px 60px}
+h2{font:600 22px system-ui,sans-serif;margin:44px 0 12px;padding-top:8px;border-top:2px solid var(--fg)}
+h3{font:600 19px system-ui,sans-serif;margin:34px 0 8px} h4{font:600 16px system-ui,sans-serif;margin:26px 0 6px}
+table{border-collapse:collapse;width:100%;margin:12px 0;font:14px/1.45 system-ui,sans-serif}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600} td.ok{color:var(--ok);font-weight:700} td.obs{color:var(--obs);font-weight:700} td.no{color:var(--no);font-weight:700}
+.ref{background:var(--soft);border-left:4px solid var(--acc);padding:10px 14px;margin:10px 0;font-size:15px} .ref ul{margin:6px 0 0;padding-left:20px}
+pre{background:#0f1724;color:#e6edf6;padding:14px;border-radius:6px;overflow:auto;font:13px/1.5 ui-monospace,Consolas,monospace}
+pre.prompt{background:var(--soft);color:var(--fg);white-space:pre-wrap;border:1px solid var(--line)}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}
+details{margin:10px 0} summary{cursor:pointer;color:var(--acc);font:500 14px system-ui,sans-serif}
+figure{margin:16px 0} figure img{max-width:560px;width:100%;border:1px solid var(--line)} figcaption{font:13px system-ui,sans-serif;color:var(--mut);margin-top:6px}
+.nota{font:13px system-ui,sans-serif;color:var(--mut)} .aviso{border:1px solid #e3c98f;background:#fff8e8;padding:10px 14px;font:14px/1.5 system-ui,sans-serif}
+.dl a{display:inline-block;margin:4px 10px 4px 0;padding:6px 12px;border:1px solid var(--acc);border-radius:4px;color:var(--acc);text-decoration:none;font:500 14px system-ui,sans-serif}
+footer{border-top:1px solid var(--line);color:var(--mut);font:13px system-ui,sans-serif;padding:20px 24px;text-align:center}
+</style></head>
+<body>
+<header><div class="w">
+<h1>The use of Generative Artificial Intelligence in advanced mathematics courses</h1>
+<p>Material suplementario: prompts, respuestas completas, códigos y verificación independiente.</p>
+<p>K. Chamú Ramírez y E. Quintero-Mármol Márquez · CENIDET, TecNM · 4.º CITCA</p>
+</div></header>
+<nav><div class="w"><a href="#metodo">Método</a><a href="#prompts">Prompts</a><a href="#respuestas">Respuestas por problema</a><a href="#evaluacion">Evaluación</a><a href="#verificacion">Verificación</a><a href="#citar">Cómo citar</a></div></nav>
+<main>
+<p>Esta página reúne el material que respalda el artículo: los prompts enviados, las 25 respuestas obtenidas de ChatGPT y Gemini, su evaluación frente a una verificación independiente y los guiones para reproducirla. Cada valor de referencia puede comprobarse con <a href="verificacion/verificacion.py.txt">verificacion.py</a>.</p>
+
+<h2 id="metodo">Método</h2>
+<table><thead><tr><th>Corrida</th><th>Fecha</th><th>Condición</th><th>ChatGPT (cuenta Plus)</th><th>Gemini (cuenta educativa)</th></tr></thead><tbody>
+<tr><td>1</td><td>agosto–septiembre de 2026</td><td>Zero-shot</td><td>GPT-5.6 Sol, razonamiento alto</td><td>3.6 Thinking (retirado por el proveedor)</td></tr>
+<tr><td>2</td><td>noviembre de 2026</td><td>Zero-shot</td><td>— (se usa la corrida 1)</td><td>Hydrogen Thinking</td></tr>
+<tr><td>2</td><td>noviembre de 2026</td><td>IDEAR</td><td>GPT-5.6 Sol, razonamiento alto</td><td>Hydrogen Thinking</td></tr></tbody></table>
+<ul>
+<li>Interfaz web de cada proveedor; una conversación nueva por respuesta, sin preguntas de seguimiento; una ejecución por combinación (25 respuestas).</li>
+<li>El enunciado se adjuntó como imagen. Zero-shot: «Resuelve este problema». IDEAR: el texto de la sección <a href="#prompts">Prompts</a>.</li>
+<li>Al final de cada conversación se pidió al sistema un documento con su solución y los metadatos de la sesión; esos documentos son los PDF publicados aquí.</li>
+<li>Criterios: <b>exactitud del resultado</b> (cada valor solicitado coincide con la referencia) y <b>validez del procedimiento</b> (sin errores ni afirmaciones falsas sobre su propio resultado). Tolerancias: residuo simbólico nulo; error máximo &lt; 10⁻⁸ en simulaciones; error relativo &lt; 10⁻³ en ganancias, polos y frecuencias.</li>
+</ul>
+<p class="aviso"><b>Nota de corrección.</b> Una versión previa del artículo indicaba que las respuestas originales se obtuvieron con IDEAR. En realidad se obtuvieron con el prompt zero-shot; la condición IDEAR se añadió en la corrida 2. En ChatGPT, ambas condiciones se ejecutaron en meses distintos con el mismo modelo nominal.</p>
+
+<h2 id="prompts">Prompts</h2>
+<p><b>Zero-shot</b> (todas las corridas): imagen del enunciado y el texto</p>
+<pre class="prompt">Resuelve este problema</pre>
+<p><b>IDEAR</b>: cinco componentes adaptados de patrones de prompt publicados (White et al., 2023; Schulhoff et al., 2024). Los prompts se enviaron sin etiquetas, en el orden Identidad, Destinatario, Estructura, Referencia y Acción. El texto de cada problema aparece en su sección y al inicio de cada respuesta IDEAR. Única variación: en la conversación de Gemini del problema e), la Acción aparece dos veces, antes y después de la Referencia. Descargas: <a href="prompts/prompts_IDEAR_enviados.txt">prompts enviados (.txt)</a> · <a href="prompts/prompts_IDEAR.md">protocolo de aplicación (.md)</a>.</p>
+<p class="nota">La Referencia del problema c) pedía reportar valores obtenidos de la respuesta al escalón y no de aproximaciones de segundo orden; esa instrucción pudo favorecer a la condición IDEAR en ese problema.</p>
+
+<h2 id="respuestas">Respuestas por problema</h2>
+<p class="nota">✓ correcto · ✓* correcto con observación · ✗ incorrecto. Los PDF se abren en una pestaña nueva.</p>
+
+<section class="problema" id="pa">
+<h3>a) Ecuaciones diferenciales ordinarias</h3>
+<p class="enunciado"><b>Enunciado.</b> Obtener, por coeficientes indeterminados, la forma de una solución particular de (D² − 2D − 3)y = x sen 2x + x³e³ˣ.</p>
+<div class="ref"><b>Resultado de referencia verificado</b><ul><li>y<sub>p</sub> = (Ax + B) cos 2x + (Cx + D) sen 2x + x e<sup>3x</sup>(Ex³ + Fx² + Gx + H) (el término e<sup>3x</sup> es resonante y se multiplica por x).</li><li>Coeficientes (no solicitados): A = 4/65, B = −244/4225, C = −7/65, D = −158/4225, E = 1/16, F = −1/16, G = 3/64, H = −3/128. Residuo simbólico nulo.</li></ul></div>
+<table><thead><tr><th>Corrida</th><th>Sistema y modelo</th><th>Condición</th><th>Fecha</th><th>Evaluación</th><th>Observación</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>1</td><td>ChatGPT · GPT-5.6 Sol</td><td>Zero-shot</td><td>ago 2026</td><td class='ok'>✓</td><td>Forma correcta; calcula además los coeficientes por desplazamiento del operador.</td><td><a href='respuestas/a_edo_gpt_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>1</td><td>Gemini · 3.6 Thinking</td><td>Zero-shot</td><td>ago–sep 2026</td><td class='ok'>✓</td><td>Forma correcta; no calcula coeficientes.</td><td><a href='respuestas/a_edo_gemini36_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>Zero-shot</td><td>nov 2026</td><td class='ok'>✓</td><td>Forma correcta; no calcula coeficientes.</td><td><a href='respuestas/a_edo_geminiH_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>ChatGPT · GPT-5.6 Sol</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Forma y coeficientes correctos; verificación simbólica en MATLAB.</td><td><a href='respuestas/a_edo_gpt_idear.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Forma y coeficientes correctos.</td><td><a href='respuestas/a_edo_geminiH_idear.pdf' target='_blank'>PDF</a></td></tr>
+</tbody></table>
+<details><summary>Prompt IDEAR enviado en este problema</summary><pre class="prompt">Eres profesor de Matemáticas Avanzadas en un posgrado de ingeniería en control automático.
+
+Escribe para un estudiante de primer semestre de maestría que ya cursó ecuaciones diferenciales ordinarias en licenciatura. Justifica cada paso que no sea una operación algebraica elemental.
+
+- Organiza la respuesta por inciso, con el mismo orden y nombre que en el enunciado.
+- Escribe una ecuación por línea.
+- Responde exactamente lo que pide el enunciado.
+- Termina con una tabla resumen con el resultado de cada inciso.
+- Incluye al final un bloque de código MATLAB que verifique los resultados, ejecutable sin modificaciones, y reporta el valor de todos los parámetros numéricos que utilice.
+
+Usa la notación de operadores D = d/dx y el método de coeficientes indeterminados (enfoque del anulador) como en Zill, Ecuaciones diferenciales con aplicaciones de modelado. Si algún término de la forma propuesta coincide con la solución homogénea, indícalo explícitamente.
+
+Resuelve el problema de la imagen adjunta.</pre></details>
+
+</section>
+<section class="problema" id="pb">
+<h3>b) Transformada de Laplace</h3>
+<p class="enunciado"><b>Enunciado.</b> Para ÿ + 2ẏ + 10y = u̇ − u con y(0⁻) = 1, ẏ(0⁻) = 3 y u escalón unitario: respuestas de entrada cero, de estado cero y total, y comprobación con lsim.</p>
+<div class="ref"><b>Resultado de referencia verificado</b><ul><li>y<sub>ec</sub>(t) = e<sup>−t</sup>[cos 3t + (4/3) sen 3t]</li><li>y<sub>ez</sub>(t) = −1/10 + e<sup>−t</sup>[(1/10) cos 3t + (11/30) sen 3t]</li><li>y<sub>T</sub>(t) = −1/10 + e<sup>−t</sup>[(11/10) cos 3t + (17/10) sen 3t]; y(0⁺) = 1, ẏ(0⁺) = 4.</li><li>Con x₁ = y, x₂ = ẏ − u: A = [0 1; −10 −2], B = [1; −3], C = [1 0], x(0) = [1; 3]; error máximo frente a lsim 2.6×10⁻¹⁴.</li></ul></div>
+<table><thead><tr><th>Corrida</th><th>Sistema y modelo</th><th>Condición</th><th>Fecha</th><th>Evaluación</th><th>Observación</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>1</td><td>ChatGPT · GPT-5.6 Sol</td><td>Zero-shot</td><td>ago 2026</td><td class='ok'>✓</td><td>Analítico correcto; código con x₂ = ẏ − u y x(0) = [1; 3].</td><td><a href='respuestas/b_laplace_gpt_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>1</td><td>Gemini · 3.6 Thinking</td><td>Zero-shot</td><td>ago–sep 2026</td><td class='no'>✓ / ✗</td><td>Analítico correcto; el código se ejecuta pero x(0) corresponde a otra realización: respuestas de entrada cero y total incorrectas (ver caso documentado).</td><td><a href='respuestas/b_laplace_gemini36_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>Zero-shot</td><td>nov 2026</td><td class='ok'>✓</td><td>Analítico correcto; código con x0 = obsv(sys)\[1;3].</td><td><a href='respuestas/b_laplace_geminiH_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>ChatGPT · GPT-5.6 Sol</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Analítico correcto; misma realización que el zero-shot.</td><td><a href='respuestas/b_laplace_gpt_idear.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Analítico correcto; forma canónica observable con x(0) = [1; 5].</td><td><a href='respuestas/b_laplace_geminiH_idear.pdf' target='_blank'>PDF</a></td></tr>
+</tbody></table>
+<details><summary>Prompt IDEAR enviado en este problema</summary><pre class="prompt">Eres profesor de Matemáticas Avanzadas en un posgrado de ingeniería en control automático.
+
+Escribe para un estudiante de primer semestre de maestría que ya cursó ecuaciones diferenciales y conoce la transformada de Laplace. Justifica cada paso que no sea una operación algebraica elemental.
+
+- Organiza la respuesta por inciso, con el mismo orden y nombre que en el enunciado.
+- Escribe una ecuación por línea.
+- Responde exactamente lo que pide el enunciado.
+- Termina con una tabla resumen con el resultado de cada inciso.
+- Incluye al final un bloque de código MATLAB que verifique los resultados, ejecutable sin modificaciones, y reporta el valor de todos los parámetros numéricos que utilice (intervalo de tiempo, paso, condiciones iniciales y matrices empleadas).
+
+Las condiciones iniciales están definidas en t = 0⁻ y la entrada u(t) es un escalón unitario aplicado en t = 0. Usa la transformada unilateral de Laplace con la convención de Ogata, Ingeniería de control moderna.
+
+Resuelve el problema de la imagen adjunta.</pre></details>
+
+<h4>Caso documentado: condiciones iniciales entre realizaciones</h4>
+<p>Como u̇ = δ(t), la derivada de la salida salta: y(0⁺) = 1 y ẏ(0⁺) = 4, mientras que el problema define las condiciones en t = 0⁻. Con la realización x₁ = y, x₂ = ẏ − u, el estado no salta (x₂(0⁻) = 3 − 0 = x₂(0⁺) = 4 − 1), por lo que x(0) = [1; 3] es válido con ambas convenciones.</p>
+<p>Gemini 3.6 Thinking construyó la realización con <code>ss(tf(...))</code>, pero calculó x(0) para otra realización que solo describió en un comentario. El código se ejecuta sin errores; la respuesta de estado cero es correcta (no depende de x(0)), pero la total arranca en y(0) ≠ 1, con error máximo de 1.8 a 2.7 según la realización que construya la versión de MATLAB.</p>
+<pre><code>% Código original (Gemini 3.6 Thinking)
+sys_tf = tf([1, -1], [1, 2, 10]);
+sys_ss = ss(sys_tf);
+% y = -x1 + x2 --> C = [-1 1]
+x0 = [-6/13; 7/13];
+y_total_sim = lsim(sys_ss, u, t, x0);
+
+% Corrección (independiente de la realización; válida porque D = 0 y u(0-) = 0)
+x0 = obsv(sys_ss) \ [1; 3];</code></pre>
+<figure><img src="figuras/fig_laplace.png" alt="Respuesta total analítica, del código original y del código corregido"><figcaption>Figura 1. Respuesta total analítica, del código original y del corregido (realización canónica controlable). Con la corrección, el error baja a 2.4×10⁻¹⁴.</figcaption></figure>
+</section>
+<section class="problema" id="pc">
+<h3>c) Transformada Z</h3>
+<p class="enunciado"><b>Enunciado.</b> Para G<sub>p</sub>(s) = 1125/[s(s + 5)] con retenedor de orden cero y T = 1 s: equivalente discreto, análisis del lazo cerrado y controlador con M<sub>p</sub> ≤ 10 %, t<sub>s</sub> ≤ 5 s (2 %), e<sub>ss</sub> = 0 y t<sub>r</sub> mínimo; diseño analógico equivalente.</p>
+<div class="ref"><b>Resultado de referencia verificado</b><ul><li>G(z) = (180.3032 z + 43.1808)/(z² − 1.006738 z + 0.006738); sin controlador, polos en −179.06 y −0.2412 (inestable).</li><li>C(z) = 0.0038751: polos 0.1540 ± j0.3877 (|z| = 0.4172); M<sub>p</sub> = 8.13 % en las muestras y 11.20 % entre muestras; t<sub>s</sub> = 4 s.</li><li>C(s) = 0.0158974: M<sub>p</sub> = 10 %, t<sub>s</sub> = 1.401 s, t<sub>r</sub> = 0.433 s.</li></ul></div>
+<table><thead><tr><th>Corrida</th><th>Sistema y modelo</th><th>Condición</th><th>Fecha</th><th>Evaluación</th><th>Observación</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>1</td><td>ChatGPT · GPT-5.6 Sol</td><td>Zero-shot</td><td>ago 2026</td><td class='obs'>✓*</td><td>K = 0.0038751 y Ka = 0.0158974; cumple M<sub>p</sub> solo en las muestras (11.20 % entre muestras).</td><td><a href='respuestas/c_z_gpt_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>1</td><td>Gemini · 3.6 Thinking</td><td>Zero-shot</td><td>ago–sep 2026</td><td class='obs'>✓*</td><td>Kd = 0.0035 y Ka = 0.0154; diseño válido (6.85 % entre muestras), pero reporta aproximaciones de 2.º orden (7.2 %, 4.3 s) como valores simulados (6.55 %, 5 s).</td><td><a href='respuestas/c_z_gemini36_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>Zero-shot</td><td>nov 2026</td><td class='ok'>✓</td><td>Compensadores de adelanto; cumple también entre muestras (M<sub>p</sub> ≈ 0 %, t<sub>s</sub> = 2 s).</td><td><a href='respuestas/c_z_geminiH_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>ChatGPT · GPT-5.6 Sol</td><td>IDEAR</td><td>nov 2026</td><td class='obs'>✓*</td><td>K = 0.004 y Ka = 0.0155; M<sub>p</sub> = 9.99 % en muestras, 12.63 % entre muestras.</td><td><a href='respuestas/c_z_gpt_idear.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>IDEAR</td><td>nov 2026</td><td class='obs'>✓*</td><td>K = 0.0038 y Ka = 0.015432; M<sub>p</sub> = 7.62 % en muestras, 10.33 % entre muestras.</td><td><a href='respuestas/c_z_geminiH_idear.pdf' target='_blank'>PDF</a></td></tr>
+</tbody></table>
+<details><summary>Prompt IDEAR enviado en este problema</summary><pre class="prompt">Eres profesor de Matemáticas Avanzadas en un posgrado de ingeniería en control automático.
+
+Escribe para un estudiante de primer semestre de maestría que ya cursó control clásico en tiempo continuo pero no sistemas en tiempo discreto. Justifica cada paso que no sea una operación algebraica elemental.
+
+- Organiza la respuesta por inciso, con el mismo orden y nombre que en el enunciado.
+- Escribe una ecuación por línea.
+- Responde exactamente lo que pide el enunciado.
+- Termina con una tabla resumen con el resultado de cada inciso.
+- Incluye al final un bloque de código MATLAB que verifique los resultados, ejecutable sin modificaciones, y reporta el valor de todos los parámetros numéricos que utilice.
+
+Usa retenedor de orden cero, la notación de Ogata, Sistemas de control en tiempo discreto, y el criterio de asentamiento del 2 %. Los valores de sobrepaso y tiempo de asentamiento que reportes deben corresponder a la respuesta al escalón del sistema en lazo cerrado, no sólo a una aproximación de segundo orden; si usas una aproximación, indícalo.
+
+Resuelve el problema de la imagen adjunta.</pre></details>
+
+<h4>Caso documentado: comportamiento entre muestras</h4>
+<table><thead><tr><th>Diseño</th><th>Controlador</th><th>M<sub>p</sub> en muestras</th><th>M<sub>p</sub> continua</th><th>t<sub>s</sub> (muestras)</th></tr></thead><tbody>
+<tr><td>ChatGPT zero-shot</td><td>C(z) = 0.0038751</td><td>8.13 %</td><td class='no'>11.20 %</td><td>4 s</td></tr>
+<tr><td>ChatGPT IDEAR</td><td>C(z) = 0.004</td><td>9.99 %</td><td class='no'>12.63 %</td><td>4 s</td></tr>
+<tr><td>Gemini Hydrogen IDEAR</td><td>C(z) = 0.0038</td><td>7.62 %</td><td class='no'>10.33 %</td><td>4 s</td></tr>
+<tr><td>Gemini 3.6 zero-shot</td><td>C(z) = 0.0035</td><td>6.55 %</td><td class='ok'>6.85 %</td><td>5 s</td></tr>
+<tr><td>Gemini Hydrogen zero-shot</td><td>C(z) = 0.0045(z − 0.006738)/(z + 0.20)</td><td>0.00 %</td><td class='ok'>≈ 0 %</td><td>2 s</td></tr>
+</tbody></table>
+<figure><img src="figuras/fig_z.png" alt="Salida continua y muestras para dos controladores"><figcaption>Figura 2. Con C(z) = 0.0038751 las muestras cumplen M<sub>p</sub> ≤ 10 %, pero la salida continua de la planta llega a 11.2 % entre muestras.</figcaption></figure>
+</section>
+<section class="problema" id="pd">
+<h3>d) Espacio de estado</h3>
+<p class="enunciado"><b>Enunciado.</b> Para A = [−3 1; −2 0], B = [1; −2], C = [1 0]: controlabilidad y observabilidad; K para polos en −2 ± 2j; observador de orden completo con polos en −3 y −4; simulación por Euler; principio de separación.</p>
+<div class="ref"><b>Resultado de referencia verificado</b><ul><li>det[B AB] = −12, det[C; CA] = 1; K = [−1/3 −2/3], L = [4; 10].</li><li>Eigenvalores del sistema aumentado {−2 ± 2j, −3, −4}; Y(s)/R(s) = (s − 2)/(s² + 4s + 8).</li><li>Con u = r − Kx̂ la salida tiende a y(∞) = −0.25 (falta precompensación).</li></ul></div>
+<table><thead><tr><th>Corrida</th><th>Sistema y modelo</th><th>Condición</th><th>Fecha</th><th>Evaluación</th><th>Observación</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>1</td><td>ChatGPT · GPT-5.6 Sol</td><td>Zero-shot</td><td>ago 2026</td><td class='ok'>✓</td><td>Advierte y(∞) = −0.25; Euler h = 10⁻³ s, x̂(0) = [0; 1].</td><td><a href='respuestas/d_estado_gpt_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>1</td><td>Gemini · 3.6 Thinking</td><td>Zero-shot</td><td>ago–sep 2026</td><td class='obs'>✓*</td><td>No advierte y(∞) = −0.25.</td><td><a href='respuestas/d_estado_gemini36_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>Zero-shot</td><td>nov 2026</td><td class='obs'>✓*</td><td>No advierte y(∞) = −0.25; Euler h = 10⁻³ s, x(0) = [2; −1].</td><td><a href='respuestas/d_estado_geminiH_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>ChatGPT · GPT-5.6 Sol</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Advierte y(∞) = −0.25; Euler h = 10⁻³ s, x̂(0) = [0; 0].</td><td><a href='respuestas/d_estado_gpt_idear.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Advierte y(∞) = −0.25; Euler h = 10⁻³ s, x(0) = [2; −1].</td><td><a href='respuestas/d_estado_geminiH_idear.pdf' target='_blank'>PDF</a></td></tr>
+</tbody></table>
+<details><summary>Prompt IDEAR enviado en este problema</summary><pre class="prompt">Eres profesor de Matemáticas Avanzadas en un posgrado de ingeniería en control automático.
+
+Escribe para un estudiante de primer semestre de maestría que ya cursó control clásico y álgebra lineal, pero no control en espacio de estado. Justifica cada paso que no sea una operación algebraica elemental.
+
+- Organiza la respuesta por inciso, con el mismo orden y nombre que en el enunciado.
+- Escribe una ecuación por línea.
+- Responde exactamente lo que pide el enunciado.
+- Termina con una tabla resumen con el resultado de cada inciso.
+- Incluye al final un bloque de código MATLAB que verifique los resultados, ejecutable sin modificaciones, y reporta el valor de todos los parámetros numéricos que utilice (paso de integración, intervalo de tiempo, referencia y condiciones iniciales del sistema y del estimador).
+
+Usa la notación de Ogata, Ingeniería de control moderna: u = r − K x̂ y estimador de orden completo x̂&#x27; = A x̂ + B u + L (y − C x̂). Usa la ley de control exactamente como está planteada en el enunciado.
+
+Resuelve el problema de la imagen adjunta.</pre></details>
+
+<h4>Caso documentado: dependencia del paso de integración</h4>
+<table><thead><tr><th>Paso h</th><th>Máx. error de trayectoria en [0, 10] s</th><th>‖x − x̂‖ &lt; 10⁻¹⁰ desde</th></tr></thead><tbody>
+<tr><td>0.1 s</td><td>0.37</td><td>7.40 s</td></tr><tr><td>0.01 s</td><td>0.030</td><td>8.56 s</td></tr>
+<tr><td>0.001 s</td><td>0.0030</td><td>8.67 s</td></tr><tr><td>Solución exacta</td><td>—</td><td>8.68 s</td></tr></tbody></table>
+<p class="nota">x(0) = [1; −1], x̂(0) = [0; 1], r = 1, u = r − Kx̂. Solución exacta por exponencial de matriz.</p>
+<figure><img src="figuras/fig_euler.png" alt="Error de Euler contra paso de integración"><figcaption>Figura 3. Error máximo de trayectoria del método de Euler frente al paso h: pendiente 1, propia de un método de primer orden.</figcaption></figure>
+</section>
+<section class="problema" id="pe">
+<h3>e) Respuesta en frecuencia</h3>
+<p class="enunciado"><b>Enunciado.</b> Para L(s) = K<sub>c</sub>/[s(s + 2)(s + 3)]: K<sub>c</sub> para margen de fase de 60°, para margen de ganancia de 2 y para módulo máximo de lazo cerrado de +2 dB; ganancia y frecuencia últimas.</p>
+<div class="ref"><b>Resultado de referencia verificado</b><ul><li>MF = 60°: K<sub>c</sub> = 4.1578 (ω<sub>c</sub> = 0.6448 rad/s).</li><li>MG = 2: K<sub>c</sub> = 15 (ω = √6 rad/s).</li><li>M<sub>r</sub> = +2 dB: K<sub>c</sub> = 6.6110 (ω<sub>r</sub> = 1.0171 rad/s).</li><li>K<sub>u</sub> = 30, ω<sub>u</sub> = √6 = 2.4495 rad/s.</li></ul></div>
+<table><thead><tr><th>Corrida</th><th>Sistema y modelo</th><th>Condición</th><th>Fecha</th><th>Evaluación</th><th>Observación</th><th>Respuesta</th></tr></thead><tbody>
+<tr><td>1</td><td>ChatGPT · GPT-5.6 Sol</td><td>Zero-shot</td><td>ago 2026</td><td class='ok'>✓</td><td>Todos los incisos correctos; fzero en el intervalo [0.1, 3].</td><td><a href='respuestas/e_frecuencia_gpt_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>1</td><td>Gemini · 3.6 Thinking</td><td>Zero-shot</td><td>ago–sep 2026</td><td class='ok'>✓</td><td>Todos los incisos correctos; fzero con valor inicial 6.</td><td><a href='respuestas/e_frecuencia_gemini36_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>Zero-shot</td><td>nov 2026</td><td class='ok'>✓</td><td>Todos los incisos correctos.</td><td><a href='respuestas/e_frecuencia_geminiH_zeroshot.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>ChatGPT · GPT-5.6 Sol</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Todos los incisos correctos.</td><td><a href='respuestas/e_frecuencia_gpt_idear.pdf' target='_blank'>PDF</a></td></tr>
+<tr><td>2</td><td>Gemini · Hydrogen Thinking</td><td>IDEAR</td><td>nov 2026</td><td class='ok'>✓</td><td>Todos los incisos correctos.</td><td><a href='respuestas/e_frecuencia_geminiH_idear.pdf' target='_blank'>PDF</a></td></tr>
+</tbody></table>
+<details><summary>Prompt IDEAR enviado en este problema</summary><pre class="prompt">Eres profesor de Matemáticas Avanzadas en un posgrado de ingeniería en control automático.
+
+Escribe para un estudiante de primer semestre de maestría que ya cursó control clásico en tiempo continuo. Justifica cada paso que no sea una operación algebraica elemental.
+
+- Organiza la respuesta por inciso, con el mismo orden y nombre que en el enunciado.
+- Escribe una ecuación por línea.
+- Responde exactamente lo que pide el enunciado.
+- Termina con una tabla resumen con el resultado de cada inciso, incluyendo la frecuencia asociada a cada ganancia.
+- Incluye al final un bloque de código MATLAB que verifique los resultados, ejecutable sin modificaciones, y reporta el valor de todos los parámetros numéricos que utilice.
+
+Usa la notación de Ogata, Ingeniería de control moderna: margen de fase, margen de ganancia, máximo módulo de lazo cerrado Mr en dB y carta de Nichols. Expresa el margen de ganancia como cociente (no en dB) salvo que el enunciado indique otra cosa.
+
+Resuelve el problema de la imagen adjunta.</pre></details>
+
+</section>
+
+<h2 id="evaluacion">Evaluación global</h2>
+<table><thead><tr><th>Problema</th><th>ChatGPT zero-shot</th><th>Gemini 3.6 zero-shot</th><th>Gemini H zero-shot</th><th>ChatGPT IDEAR</th><th>Gemini H IDEAR</th></tr></thead><tbody><tr><td>a) Ecuaciones diferenciales ordinarias</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td></tr><tr><td>b) Transformada de Laplace</td><td class='ok'>✓</td><td class='no'>✓ / ✗</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td></tr><tr><td>c) Transformada Z</td><td class='obs'>✓*</td><td class='obs'>✓*</td><td class='ok'>✓</td><td class='obs'>✓*</td><td class='obs'>✓*</td></tr><tr><td>d) Espacio de estado</td><td class='ok'>✓</td><td class='obs'>✓*</td><td class='obs'>✓*</td><td class='ok'>✓</td><td class='ok'>✓</td></tr><tr><td>e) Respuesta en frecuencia</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td><td class='ok'>✓</td></tr></tbody></table>
+<ul>
+<li>IDEAR no cambió la exactitud de ningún resultado; hizo las respuestas más fáciles de auditar (parámetros reportados, tabla resumen).</li>
+<li>El error de condiciones iniciales de Gemini 3.6 no aparece en Gemini Hydrogen con ninguno de los dos prompts.</li>
+<li>Con una ejecución por combinación, estos resultados describen casos y no permiten estimar efectos ni comparar proveedores.</li>
+</ul>
+<p class="dl"><a href="verificacion/evaluacion_zeroshot_vs_IDEAR.md">Evaluación detallada (.md)</a></p>
+
+<h2 id="verificacion">Verificación independiente</h2>
+<p>Los valores de referencia se calcularon con Python 3.13 (SymPy 1.14, NumPy 2.5, SciPy 1.18, python-control 0.10). El guion reproduce todas las cifras y las tres figuras de esta página; su salida completa está publicada.</p>
+<p class="dl"><a href="verificacion/verificacion.py.txt">verificacion.py</a><a href="verificacion/salida_verificacion.txt">Salida de la verificación (.txt)</a><a href="verificacion/verificacion_independiente.m.txt">Versión MATLAB (.m)</a></p>
+<p class="nota">Ejecución: <code>pip install sympy numpy scipy control matplotlib</code> y después <code>python verificacion.py</code>.</p>
+
+<h2 id="citar">Cómo citar</h2>
+<p>Chamú Ramírez, K. y Quintero-Mármol Márquez, E. (2026). The use of Generative Artificial Intelligence in advanced mathematics courses. En <i>Memorias del 4.º Congreso CITCA</i>. Material suplementario: <span style="color:#b42318">[DOI de Zenodo]</span>.</p>
+</main>
+<footer>Contenido bajo licencia CC BY 4.0; código bajo licencia MIT. Las respuestas fueron generadas por ChatGPT (OpenAI) y Gemini (Google) y se publican sin modificar.</footer>
+</body></html>
