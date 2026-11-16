@@ -71,13 +71,13 @@ for nombre, S in realiz.items():
       f"estado cero={np.abs(y_zs-yzs).max():.1e}, total={np.abs(y_to-yT).max():.3f} | DESPUÉS x0={np.round(x_ok,4)}, "
       f"err total={np.abs(y_ok-yT).max():.1e}")
     if fig_data is None: fig_data = (y_to, y_ok)
-plt.figure(figsize=(3.3, 2.2))
+plt.figure(figsize=(3.3, 2.45))
 plt.plot(t, yT, "k", lw=1.6, label="Analítica, Ec. (4)")
 plt.plot(t, fig_data[0], "r--", lw=1.2, label="Código original")
 plt.plot(t, fig_data[1], "b:", lw=1.6, label="Código corregido")
-plt.xlabel("t [s]", fontsize=8); plt.ylabel("y(t)", fontsize=8); plt.grid(alpha=.3)
-plt.legend(fontsize=7, frameon=False); plt.tick_params(labelsize=7); plt.tight_layout()
-plt.savefig("figuras/fig_laplace.pdf"); plt.savefig("figuras/fig_laplace.png", dpi=200); plt.close()
+plt.xlabel("t [s]", fontsize=9); plt.ylabel("y(t)", fontsize=9); plt.grid(alpha=.3)
+plt.legend(fontsize=8, frameon=False); plt.tick_params(labelsize=8); plt.tight_layout()
+plt.savefig("figuras/fig_laplace.pdf"); plt.savefig("figuras/fig_laplace.png", dpi=300); plt.close()
 
 # --------------------------------------------------------------------------- c)
 p("\n=== c) Transformada Z: Gp(s)=1125/[s(s+5)], ZOH, T=1 s")
@@ -110,16 +110,16 @@ for nombre, Cs in {"GPT ZS  Ka=0.0158974": 0.0158974, "GPT IDEAR Ka=0.0155": 0.0
     idx = np.where(np.abs(y-1) > 0.02)[0]
     p(f"{nombre:34s} Mp={(y.max()-1)*100:.2f}% ts={tt[idx[-1]+1]:.3f} s "
       f"tr(10-90)={tt[np.argmax(y>=0.9)]-tt[np.argmax(y>=0.1)]:.3f} s")
-plt.figure(figsize=(3.3, 2.2))
+plt.figure(figsize=(3.3, 2.45))
 k, y, tc, yc = curvas["GPT ZS  C(z)=0.0038751"]
 plt.plot(tc, yc, "r", lw=1.1, label="Salida continua, K=0.0038751")
 plt.plot(k, y, "ro", ms=3.5, label="Muestras")
 k2, y2, tc2, yc2 = curvas["Gem. H ZS adelanto"]
 plt.plot(tc2, yc2, "b--", lw=1.1, label="Salida continua, adelanto")
-plt.axhline(1.10, color="gray", ls=":", lw=1); plt.text(5.5, 1.125, "límite $M_p$ = 10 %", fontsize=7, color="gray"); plt.ylim(0, 1.25)
-plt.xlim(0, 10); plt.xlabel("t [s]", fontsize=8); plt.ylabel("y(t)", fontsize=8); plt.grid(alpha=.3)
-plt.legend(fontsize=6.5, frameon=False, loc="lower right"); plt.tick_params(labelsize=7); plt.tight_layout()
-plt.savefig("figuras/fig_z.pdf"); plt.savefig("figuras/fig_z.png", dpi=200); plt.close()
+plt.axhline(1.10, color="gray", ls=":", lw=1); plt.text(5.5, 1.125, "límite $M_p$ = 10 %", fontsize=8, color="gray"); plt.ylim(0, 1.25)
+plt.xlim(0, 10); plt.xlabel("t [s]", fontsize=9); plt.ylabel("y(t)", fontsize=9); plt.grid(alpha=.3)
+plt.legend(fontsize=8, frameon=False, loc="lower right"); plt.tick_params(labelsize=8); plt.tight_layout()
+plt.savefig("figuras/fig_z.pdf"); plt.savefig("figuras/fig_z.png", dpi=300); plt.close()
 
 # --------------------------------------------------------------------------- d)
 p("\n=== d) Espacio de estado")
@@ -132,7 +132,7 @@ p("eigenvalores del sistema aumentado:", np.round(np.linalg.eigvals(Ab), 6))
 Tcl = ct.ss(Ab, Bb, np.hstack([C, np.zeros((1, 2))]), 0)
 p("Y(s)/R(s) =", ct.minreal(ct.ss2tf(Tcl), verbose=False), " y(inf) =", round(float(np.real(ct.dcgain(Tcl))), 6))
 M = np.zeros((5, 5)); M[:4, :4] = Ab; M[:4, 4] = Bb[:, 0]
-plt.figure(figsize=(3.3, 2.2))
+plt.figure(figsize=(3.3, 2.45))
 for z0, etiqueta in [(np.array([1, -1, 0, 1.]), "x̂(0)=[0;1] (GPT ZS)"), (np.array([1, -1, 0, 0.]), "x̂(0)=[0;0] (GPT IDEAR)")]:
     tc_ex = None; tt = np.arange(0, 12, 1e-3)
     for ti in tt:
@@ -149,9 +149,9 @@ for z0, etiqueta in [(np.array([1, -1, 0, 1.]), "x̂(0)=[0;1] (GPT ZS)"), (np.ar
         if h in (0.1, 0.01, 0.001):
             p(f"   h={h:<6} max|x_Euler - x_exacta| en [0,10] s = {err:.2e}   ||e||<1e-10 desde t={tcr}")
     plt.loglog(hs, errs, "o-", ms=3, lw=1, label=etiqueta)
-plt.xlabel("h [s]", fontsize=8); plt.ylabel("máx. error de trayectoria", fontsize=8); plt.grid(alpha=.3, which="both")
-plt.legend(fontsize=6.5, frameon=False); plt.tick_params(labelsize=7); plt.tight_layout()
-plt.savefig("figuras/fig_euler.pdf"); plt.savefig("figuras/fig_euler.png", dpi=200); plt.close()
+plt.xlabel("h [s]", fontsize=9); plt.ylabel("máx. error de trayectoria", fontsize=9); plt.grid(alpha=.3, which="both")
+plt.legend(fontsize=8, frameon=False); plt.tick_params(labelsize=8); plt.tight_layout()
+plt.savefig("figuras/fig_euler.pdf"); plt.savefig("figuras/fig_euler.png", dpi=300); plt.close()
 
 # --------------------------------------------------------------------------- e)
 p("\n=== e) Respuesta en frecuencia: L(s)=K/[s(s+2)(s+3)]")

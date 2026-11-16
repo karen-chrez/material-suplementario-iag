@@ -1,6 +1,6 @@
 # Material suplementario: IAG en Matemáticas Avanzadas
 
-Material suplementario del artículo *The use of Generative Artificial Intelligence in advanced mathematics courses* (4.º CITCA).
+Material suplementario del artículo *The Use of Generative Artificial Intelligence in Advanced Mathematics Courses* (4.º CITCA).
 
 ## Contenido
 
@@ -22,15 +22,4 @@ cd verificacion
 python verificacion.py
 ```
 
-## Publicar
-
-1. Crear un repositorio público en GitHub y subir todo el contenido de esta carpeta.
-2. En **Settings → Pages**, elegir *Deploy from a branch*, rama `main`, carpeta `/ (root)`. La página queda en `https://<usuario>.github.io/<repositorio>/`.
-3. Para el DOI: entrar a zenodo.org con la cuenta de GitHub, activar el repositorio en **GitHub → Repositories** y crear un *release* en GitHub. Zenodo archiva esa versión y le asigna un DOI.
-4. Escribir el DOI en `index.html` (sección «Cómo citar») y en el artículo.
-
-Si la revisión es doble ciego, usar mientras tanto una copia anónima (por ejemplo, anonymous.4open.science) y quitar los nombres de `index.html`.
-
-## Licencia
-
-Textos y figuras: CC BY 4.0. Código: MIT. Las respuestas fueron generadas por ChatGPT (OpenAI) y Gemini (Google) y se publican sin modificar.
+Página: https://karen-chrez.github.io/material-suplementario-iag/
